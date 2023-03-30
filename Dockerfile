@@ -1,6 +1,7 @@
 FROM --platform=amd64 ubuntu:20.04
 
 LABEL maintainer="Kiki Technology Station For TaoBao"
+ENV NEPER_VERSION=V4.5.0
 
 # 非交互式终端
 ENV DEBIAN_FRONTEND=noninteractive
@@ -20,7 +21,7 @@ RUN ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && apt-get install -y gcc g++ cmake make \
             libnlopt-dev imagemagick mpich \
             glibc-doc manpages-posix-dev wget libgmsh-dev libgsl-dev \
-            libscotch-dev povray \
+            libscotch-dev povray git \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,19 +36,14 @@ RUN wget -c https://mirrors.tuna.tsinghua.edu.cn/gnu/gsl/gsl-2.7.tar.gz \
     && rm -rf gsl-2.7 gsl-2.7.tar.gz \
     && ldconfig
 
-COPY sources/neper-4.1.1.tgz .
-
-RUN tar -zxvf neper-4.1.1.tgz \
-    && cd neper-4.1.1/src \
+RUN git https://github.com/neperfepx/neper.git -t ${NEPER_VERSION} \
+    && cd neper/src \
     && mkdir build \
     && cd build \
     && cmake -DHAVE_OPENMP=OFF .. \
     && make -j10 \
     && make install \
     && cd  \
-    && rm -rf neper-4.1.1 neper-4.1.1.tgz
+    && rm -rf neper
 
 CMD [ "neper" ]
-
-
-
