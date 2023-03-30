@@ -36,7 +36,7 @@ RUN wget -c https://mirrors.tuna.tsinghua.edu.cn/gnu/gsl/gsl-2.7.tar.gz \
     && rm -rf gsl-2.7 gsl-2.7.tar.gz \
     && ldconfig
 
-RUN git clone https://github.com/neperfepx/neper.git -b ${NEPER_VERSION} \
+RUN git clone https://github.com/neperfepx/neper.git --single-branch -b ${NEPER_VERSION} \
     && cd neper/src \
     && mkdir build \
     && cd build \

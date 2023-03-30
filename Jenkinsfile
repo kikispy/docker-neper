@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                sh 'docker push luckyant/docker-neper:${NEPER_VERSION}'
+                sh 'docker push luckyant/docker-neper:${NEPER_VERSION} --max-concurrent-uploads 1'
             }
         }
         stage('Docker Remove') {
