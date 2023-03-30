@@ -16,7 +16,10 @@ pipeline {
         }
         stage('Docker Remove') {
             steps {
-                sh '''docker rmi luckyant/docker-neper:${NEPER_VERSION};docker rmi $(docker images -qf "dangling=true")'''
+                sh '''
+                docker images | grep docker-neper && docker rmi luckyant/docker-neper:${NEPER_VERSION} || echo "Nothing to do"
+                docker images | grep none && docker rmi $(docker images -qf "dangling=true") || echo "Nothing to do"
+                '''
             }
         }
 
