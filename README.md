@@ -21,7 +21,7 @@ docker build -t docker-neper:lastest .
 - 验证
 
 ```
-docker run -it docker-neper:lastest bash
+docker run -it luckyant/docker-neper:lastest bash
 
 neper -T -n 10 -id 1 -reg 1
 
