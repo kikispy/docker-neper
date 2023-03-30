@@ -1,13 +1,9 @@
 pipeline {
+    agent any
     environment {
-        NEPER_VERSION = 'V4.5.0'
+        NEPER_VERSION = 'v4.5.0'
     }
     stages {
-        stage('Git Clone') {
-            steps {
-                sh 'git clone https://github.com/miniluckyant/docker-neper.git -b ${NEPER_VERSION} '
-            }
-        }
         stage('Docker Build') {
             steps {
                 sh 'docker build -t luckyant/docker-neper:${NEPER_VERSION} .'
@@ -15,12 +11,12 @@ pipeline {
         }
         stage('Docker Push') {
             steps {
-                sh 'docker push luckyant/docker-neper:${NEPER_VERSION}'
+                sh 'docker push luckyant/docker-neper:${NEPER_VERSION} --max-concurrent-uploads 1'
             }
         }
         stage('Docker Remove') {
             steps {
-                sh 'docker rmi luckyant/docker-neper:${NEPER_VERSION}'
+                sh '''docker rmi luckyant/docker-neper:${NEPER_VERSION};docker rmi $(docker images -qf "dangling=true")'''
             }
         }
 

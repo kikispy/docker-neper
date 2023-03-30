@@ -1,7 +1,7 @@
 FROM --platform=amd64 ubuntu:20.04
 
 LABEL maintainer="Kiki Technology Station For TaoBao"
-ENV NEPER_VERSION=V4.5.0
+ENV NEPER_VERSION=v4.5.0
 
 # 非交互式终端
 ENV DEBIAN_FRONTEND=noninteractive
@@ -36,7 +36,7 @@ RUN wget -c https://mirrors.tuna.tsinghua.edu.cn/gnu/gsl/gsl-2.7.tar.gz \
     && rm -rf gsl-2.7 gsl-2.7.tar.gz \
     && ldconfig
 
-RUN git https://github.com/neperfepx/neper.git -t ${NEPER_VERSION} \
+RUN git clone https://github.com/neperfepx/neper.git --single-branch -b ${NEPER_VERSION} \
     && cd neper/src \
     && mkdir build \
     && cd build \
