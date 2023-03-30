@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        NEPER_VERSION = 'V4.5.0'
+        NEPER_VERSION = 'v4.5.0'
     }
     stages {
         stage('Docker Build') {

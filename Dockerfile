@@ -1,7 +1,7 @@
 FROM --platform=amd64 ubuntu:20.04
 
 LABEL maintainer="Kiki Technology Station For TaoBao"
-ENV NEPER_VERSION=V4.5.0
+ENV NEPER_VERSION=v4.5.0
 
 # 非交互式终端
 ENV DEBIAN_FRONTEND=noninteractive
