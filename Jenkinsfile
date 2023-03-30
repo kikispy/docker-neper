@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     environment {
         NEPER_VERSION = 'V4.5.0'
     }
